@@ -12,7 +12,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class MyPageAction extends ActionSupport implements SessionAware{
 
-	public Map<String,Object> session;
+	private Map<String,Object> session;
 	private MyPageDAO myPageDAO=new MyPageDAO();
 	private ArrayList<MyPageDTO>myPageList=new ArrayList<MyPageDTO>();
 	private String deleteFlg;
@@ -27,6 +27,7 @@ public class MyPageAction extends ActionSupport implements SessionAware{
 			String item_transaction_id=session.get("id").toString();
 			String user_master_id=session.get("login_user_id").toString();
 			myPageList=myPageDAO.getMyPageUserInfo(item_transaction_id,user_master_id);
+//			System.out.println(myPageList.toString());
 		}else if(deleteFlg.equals("1")){
 			delete();
 		}
@@ -57,6 +58,10 @@ public class MyPageAction extends ActionSupport implements SessionAware{
 	@Override
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
+	}
+
+	public Map<String,Object> getSession(){
+		return this.session;
 	}
 
 	public ArrayList<MyPageDTO> getMyPageList() {
